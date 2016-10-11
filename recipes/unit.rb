@@ -1,4 +1,3 @@
-include_recipe 'nodejs::default'
 
 execute 'npm install' do
   cwd node['delivery']['workspace']['repo']
