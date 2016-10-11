@@ -1,8 +1,3 @@
-#
-# Cookbook Name:: spiderman-comic-truck
-# Recipe:: default
-#
-# Copyright 2016, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
+include_recipe 'delivery-truck::default'
+include_recipe 'nodejs::default'
+
