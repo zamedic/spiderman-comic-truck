@@ -13,10 +13,10 @@ end
 
 #Set a Registry if one is specifed
 execute "npm set registry #{node["spiderman-commic-truck"]["registry"]}" do
-  only_if node ["spiderman-commic-truck"]["registry"]
+  only_if node["spiderman-commic-truck"]["registry"]
 end
 
 #If No Registry is specified - ensure the default value is set
 execute "npm config delete registry #{node["spiderman-commic-truck"]["registry"]}" do
-  only_if node ["spiderman-commic-truck"]["registry"]
+  only_if node["spiderman-commic-truck"]["registry"]
 end
