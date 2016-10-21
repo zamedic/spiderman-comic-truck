@@ -2,13 +2,13 @@ include_recipe 'delivery-truck::default'
 include_recipe 'nodejs::default'
 
 #Set Proxy if specified
-execute "npm config set proxy #{node["spiderman-commic-truck"]["proxy"]} --global" do
+execute "npm config set proxy #{node["spiderman-commic-truck"]["proxy"]}" do
   only_if {node["spiderman-commic-truck"]["proxy"] != nil}
 end
 
 #Ensure no proxy is set if one is not specified
-execute "npm config remove proxy" do
-  not_if {node["spiderman-commic-truck"]["proxy"] == nil}
+execute "npm config delete proxy" do
+  only_if {node["spiderman-commic-truck"]["proxy"] == nil}
 end
 
 #Set a Registry if one is specifed
