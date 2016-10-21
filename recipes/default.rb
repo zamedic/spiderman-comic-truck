@@ -9,6 +9,7 @@ end
 #Ensure no proxy is set if one is not specified
 execute "npm config delete proxy" do
   only_if {node["spiderman-commic-truck"]["proxy"] == nil}
+  ignore_failure true
 end
 
 #Set a Registry if one is specifed
@@ -18,5 +19,6 @@ end
 
 #If No Registry is specified - ensure the default value is set
 execute "npm config delete registry" do
+  ignore_failure true
   only_if {node["spiderman-commic-truck"]["registry"] == nil}
 end
