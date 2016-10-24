@@ -1,5 +1,5 @@
-nodejs_npm 'jasmin'
+nodejs_npm 'jasmine'
 
-execute 'jasmin' do
-  cwd "#{node['delivery']['workspace']['repo']}/#{node["spiderman-commic-truck"]["unit"]["jasmin"]["path"]}"
+execute 'jasmine' do
+  cwd "#{node['delivery']['workspace']['repo']}/#{node["spiderman-commic-truck"]["unit"]["jasmine"]["path"]}"
 end
