@@ -22,3 +22,4 @@ execute "npm config delete registry" do
   ignore_failure true
   only_if {node["spiderman-commic-truck"]["registry"] == nil}
 end
+
