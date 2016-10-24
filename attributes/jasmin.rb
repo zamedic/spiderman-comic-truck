@@ -1,2 +1,2 @@
-default["spiderman-commic-truck"]["unit"]["jasmin"]= "false"
-default["spiderman-commic-truck"]["unit"]["jasmin"]["path"]= nil
+default['spiderman-comic-truck']['unit']['jasmin']['active']= 'false'
+default['spiderman-comic-truck']['unit']['jasmin']['path']= nil
