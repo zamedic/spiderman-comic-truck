@@ -1,5 +1,5 @@
-nodejs_npm 'jasmine'
+execute "npn install -g jasmine"
 
-execute 'jasmine' do
+execute "jasmine" do
   cwd "#{node['delivery']['workspace']['repo']}/#{node["spiderman-comic-truck"]["unit"]["jasmine"]["path"]}"
 end
