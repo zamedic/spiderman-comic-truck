@@ -14,9 +14,9 @@ module SpidermanCommicTruck
         ref_new = "origin/#{change.patchset_branch}"
         old_version, new_version = [ref_old, ref_new].map do |ref|
           package = shell_out!("git show #{ref}:package.json", cwd: change.workspace_repo).stdout.chomp
-          Chef::Log.info "Package Value: #{package}"
+          Chef::Log.warn "Package Value: #{package}"
           packageJson = JSON.parse(package)
-          Chef::Log.info "Package Json: #{package}"
+          Chef::Log.warn "Package Json: #{packageJson}"
           packageJson[1].value
         end
         Gem::Version.new(old_version) < Gem::Version.new(new_version)
