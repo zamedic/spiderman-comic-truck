@@ -1,3 +1,3 @@
-execute "#{node['delivery']['workspace']['repo']}/node_modules/.bin/grunt install" do
+execute "#{node['delivery']['workspace']['repo']}/node_modules/.bin/grunt build" do
   cwd "#{node['delivery']['workspace']['repo']}/"
 end
