@@ -1,4 +1,5 @@
 require_relative 'npm_verion'
+require_relative 'helpers_publish'
 
 
 Chef::Recipe.send(:include, SpidermanCommicTruck::DSL)
