@@ -8,9 +8,9 @@ include_recipe "spiderman-comic-truck::publish-bower" if bower
 grunt = ::File.exist?("#{node['delivery']['workspace']['repo']}/Gruntfile.js")
 include_recipe "spiderman-comic-truck::publish-grunt" if grunt
 
-execute 'npm install npm-cli-login' do
-  cwd node['delivery']['workspace']['repo']
-end
+#execute 'npm install npm-cli-login' do
+#  cwd node['delivery']['workspace']['repo']
+#end
 
 if (node["spiderman-comic-truck"]["deploy"]["registry"] == nil)
   registry = node["spiderman-comic-truck"]["registry"]
@@ -18,20 +18,26 @@ else
   registry = node["spiderman-comic-truck"]["deploy"]["registry"]
 end
 
+
+
+#execute "#{node['delivery']['workspace']['repo']}/node_modules/.bin/npm-cli-login -u #{node["spiderman-comic-truck"]["deploy"]["user"]} -p #{node["spiderman-comic-truck"]["deploy"]["password"]} -e #{node["spiderman-comic-truck"]["deploy"]["email"]} -r #{registry} --config-path='#{node['delivery']['workspace']['repo']}'" do
+#  cwd node['delivery']['workspace']['repo']
+#end
+
+cookbook_file '#{node['delivery']['workspace']['repo']}/.npmrc' do
+  source '.npmrc'
+  mode '0755'
+  action :create
+end
+
 execute "npm set registry #{registry}" do
   cwd node['delivery']['workspace']['repo']
 end
 
-
-execute "#{node['delivery']['workspace']['repo']}/node_modules/.bin/npm-cli-login -u #{node["spiderman-comic-truck"]["deploy"]["user"]} -p #{node["spiderman-comic-truck"]["deploy"]["password"]} -e #{node["spiderman-comic-truck"]["deploy"]["email"]} -r #{registry} --config-path='#{node['delivery']['workspace']['repo']}'" do
-  cwd node['delivery']['workspace']['repo']
-end
-
-
-
 execute "npm publish" do
   cwd node['delivery']['workspace']['repo']
 end
+
 
 include_recipe 'delivery-truck::publish'
 
