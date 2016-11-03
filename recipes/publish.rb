@@ -18,9 +18,16 @@ else
   registry = node["spiderman-comic-truck"]["deploy"]["registry"]
 end
 
+execute "npm set @#{node["spiderman-comic-truck"]["deploy"]["scope"]}:registry #{registry}" do
+  cwd node['delivery']['workspace']['repo']
+end
+
+
 execute "#{node['delivery']['workspace']['repo']}/node_modules/.bin/npm-cli-login -u #{node["spiderman-comic-truck"]["deploy"]["user"]} -p #{node["spiderman-comic-truck"]["deploy"]["password"]} -e #{node["spiderman-comic-truck"]["deploy"]["email"]} -r #{registry} --scope @#{node["spiderman-comic-truck"]["deploy"]["scope"]}" do
   cwd node['delivery']['workspace']['repo']
 end
+
+
 
 execute "npm publish -r #{registry}" do
   cwd node['delivery']['workspace']['repo']
