@@ -12,13 +12,13 @@ execute 'npm install npm-cli-login' do
   cwd node['delivery']['workspace']['repo']
 end
 
-if (node["spiderman-comic-truck"]["deploy_registry"] == nil)
+if (node["spiderman-comic-truck"]["deploy"]["registry"] == nil)
   registry = node["spiderman-comic-truck"]["registry"]
 else
-  registry = node["spiderman-comic-truck"]["deploy_registry"]
+  registry = node["spiderman-comic-truck"]["deploy"]["registry"]
 end
 
-execute "./node-modules/.bin/npm-cli-login -u #{node["spiderman-comic-truck"]["deploy"]["user"]} -p #{node["spiderman-comic-truck"]["deploy"]["password"]} -e #{node["spiderman-comic-truck"]["deploy"]["email"]} -r #{registry} --scope @#{node["spiderman-comic-truck"]["deploy"]["scope"]}" do
+execute "#{node['delivery']['workspace']['repo']}/node_modules/.bin/npm-cli-login -u #{node["spiderman-comic-truck"]["deploy"]["user"]} -p #{node["spiderman-comic-truck"]["deploy"]["password"]} -e #{node["spiderman-comic-truck"]["deploy"]["email"]} -r #{registry} --scope @#{node["spiderman-comic-truck"]["deploy"]["scope"]}" do
   cwd node['delivery']['workspace']['repo']
 end
 
