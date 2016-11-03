@@ -8,7 +8,9 @@ include_recipe "spiderman-comic-truck::publish-bower" if bower
 grunt = ::File.exist?("#{node['delivery']['workspace']['repo']}/Gruntfile.js")
 include_recipe "spiderman-comic-truck::publish-grunt" if grunt
 
-execute 'npm install npm-cli-login'
+execute 'npm install npm-cli-login' do
+  cwd node['delivery']['workspace']['repo']
+end
 
 if (node["spiderman-comic-truck"]["deploy_registry"] == nil)
   registry = node["spiderman-comic-truck"]["registry"]
