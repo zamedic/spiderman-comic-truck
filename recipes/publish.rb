@@ -24,7 +24,7 @@ end
 #  cwd node['delivery']['workspace']['repo']
 #end
 
-cookbook_file '#{node['delivery']['workspace']['repo']}/.npmrc' do
+cookbook_file "#{node['delivery']['workspace']['repo']}/.npmrc" do
   source '.npmrc'
   mode '0755'
   action :create
