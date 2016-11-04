@@ -31,12 +31,13 @@ expect "Email: (this IS public) "
 send "#{node["spiderman-comic-truck"]["deploy"]["email"]}\r"
 '
   EOF
-  environment "HOME" => "/var/opt/delivery/workspace"
+  environment "HOME" => "/tmp"
 end
 
 
 execute "npm publish" do
   cwd node['delivery']['workspace']['repo']
+  environment "HOME" => "/tmp"
 end
 
 
