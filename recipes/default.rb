@@ -1,6 +1,8 @@
 include_recipe 'delivery-truck::default'
 include_recipe 'nodejs::default'
 
+package "expect"
+
 #Set Proxy if specified
 execute "npm config set proxy #{node["spiderman-comic-truck"]["proxy"]}" do
   only_if {node["spiderman-comic-truck"]["proxy"] != nil}
