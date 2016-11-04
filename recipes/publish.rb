@@ -31,6 +31,7 @@ expect "Email: (this IS public) "
 send "#{node["spiderman-comic-truck"]["deploy"]["email"]}\r"
 '
   EOF
+  environment "HOME" => "/var/opt/delivery/workspace"
 end
 
 
@@ -40,6 +41,3 @@ end
 
 
 include_recipe 'delivery-truck::publish'
-
-
-
