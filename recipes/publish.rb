@@ -15,25 +15,24 @@ else
   registry = node["spiderman-comic-truck"]["deploy"]["registry"]
 end
 
+file "#{node['delivery']['workspace']['repo']}/.npmrc" do
+  content ''
+  mode '0600'
+  action :create_if_missing
+end
+
+ruby_block "insert_line" do
+  block do
+    file = Chef::Util::FileEdit.new("#{node['delivery']['workspace']['repo']}/.npmrc")
+    file = Chef::Util::FileEdit.new("~/.npmrc")
+    file.insert_line_if_no_match("//#{registry}:_authToken=#{node["spiderman-comic-truck"]["deploy"]["auth-token"]}")
+    file.write_file
+  end
+end
+
 execute "npm set registry #{registry}" do
   cwd node['delivery']['workspace']['repo']
 end
-
-bash 'setup username and password' do
-  cwd ::File.dirname('/usr/local/bin')
-  code <<-EOF
-/usr/bin/expect -c 'spawn npm adduser
-expect "Username: "
-send "#{node["spiderman-comic-truck"]["deploy"]["user"]}\r"
-expect "Password: "
-send "#{node["spiderman-comic-truck"]["deploy"]["password"]}\r"
-expect "Email: (this IS public) "
-send "#{node["spiderman-comic-truck"]["deploy"]["email"]}\r"
-'
-  EOF
-  environment "HOME" => "/tmp"
-end
-
 
 execute "npm publish" do
   cwd node['delivery']['workspace']['repo']
