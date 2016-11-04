@@ -18,7 +18,7 @@ end
 
 ruby_block "insert_line" do
   block do
-    file = Chef::Util::FileEdit.new("#{node['delivery']['workspace']['repo']}/.npmrc")
+    file = Chef::Util::FileEdit.new("~/.npmrc")
     file.insert_line_if_no_match("//#{registry}:_authToken=#{node["spiderman-comic-truck"]["deploy"]["auth-token"]}")
     file.write_file
   end
