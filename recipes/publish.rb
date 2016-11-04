@@ -21,16 +21,16 @@ end
 
 bash 'setup username and password' do
   cwd ::File.dirname('/usr/local/bin')
-  code <<-EOH
-#!/usr/bin/expect
-spawn "npm login"
-expect "Username:"
+  code <<-EOF
+/usr/bin/expect -c 'spawn npm login
+expect "Username: "
 send "#{node["spiderman-comic-truck"]["deploy"]["user"]}\r"
-expect "Password:"
+expect "Password: "
 send "#{node["spiderman-comic-truck"]["deploy"]["password"]}\r"
-expect "Email: (this IS public)"
+expect "Email: (this IS public) "
 send "#{node["spiderman-comic-truck"]["deploy"]["email"]}\r"
-EOH
+'
+  EOF
 end
 
 
