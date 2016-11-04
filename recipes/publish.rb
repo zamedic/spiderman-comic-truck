@@ -36,7 +36,6 @@ end
 
 execute "npm publish" do
   cwd node['delivery']['workspace']['repo']
-  environment "HOME" => "/tmp"
 end
 
 
