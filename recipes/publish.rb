@@ -19,6 +19,8 @@ execute "npm set registry #{registry}" do
   cwd node['delivery']['workspace']['repo']
 end
 
+package "expect"
+
 bash 'setup username and password' do
   cwd ::File.dirname('/usr/local/bin')
   code <<-EOH
