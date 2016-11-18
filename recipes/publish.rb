@@ -23,7 +23,7 @@ file "#{node['delivery']['workspace']['repo']}/.npmrc" do
   action :create_if_missing
 end
 
-ruby_block "insert_line" do
+ruby_block "add auth token" do
   block do
     tmp_repo = registry.sub("http://",'')
     file = Chef::Util::FileEdit.new("#{node['delivery']['workspace']['repo']}/.npmrc")
@@ -45,6 +45,5 @@ ruby_block "update_version" do
     update_version
   end
 end
-
 
 include_recipe 'delivery-truck::publish'
