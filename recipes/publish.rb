@@ -1,3 +1,5 @@
+include_recipe 'spiderman-comic-truck::npm-registry'
+
 execute 'npm install' do
   cwd node['delivery']['workspace']['repo']
 end
