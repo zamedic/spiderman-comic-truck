@@ -40,7 +40,11 @@ execute "npm publish" do
   cwd node['delivery']['workspace']['repo']
 end
 
+ruby_block "update_version" do
+  block do
+    update_version
+  end
+end
 
-update_version()
 
 include_recipe 'delivery-truck::publish'

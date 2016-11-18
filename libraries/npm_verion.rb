@@ -29,7 +29,7 @@ module SpidermanCommicTruck
       SpidermanCommicTruck::Helpers::Syntax.bumped_npm_version?(path, node)
     end
 
-    def update_version()
+    def update_version
       Chef::Log.warn("defining: #{node['delivery']['change']['project']}, #{version_number}, #{Hash.new}")
       define_project_application(node['delivery']['change']['project'], version_number, Hash.new)
       Chef::Log.warn("Synching envs: #{node}")
@@ -43,7 +43,8 @@ module SpidermanCommicTruck
       path = "#{cwd}/package.json"
       doc = ::File.read(path) { |f|  JSON.parse(f) }
       Chef::Log.warn("doc: #{doc}")
-      doc["version"]
+      Chef::Log.warn("doc: #{doc['version']}")
+      doc['version']
     end
 
   end
