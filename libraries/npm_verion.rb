@@ -3,7 +3,7 @@ require 'json'
 
 module SpidermanCommicTruck
   module Helpers
-    module Syntax < Chef::Provider::LWRPBase
+    module Syntax 
       include Chef::Mixin::ShellOut
       use_inline_resources
 
