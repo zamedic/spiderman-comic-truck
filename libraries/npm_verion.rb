@@ -30,9 +30,9 @@ module SpidermanCommicTruck
     end
 
     def update_version()
-      Chef::Log.info("defining: #{node['delivery']['change']['project']}, #{version_number}, #{Hash.new}")
+      Chef::Log.warn("defining: #{node['delivery']['change']['project']}, #{version_number}, #{Hash.new}")
       define_project_application(node['delivery']['change']['project'], version_number, Hash.new)
-      Chef::Log.info("Synching envs: #{node}")
+      Chef::Log.warn("Synching envs: #{node}")
       sync_envs(node)
     end
 
@@ -42,6 +42,7 @@ module SpidermanCommicTruck
       cwd =  node['delivery']['workspace']['repo']
       path = "#{cwd}/package.json"
       doc = ::File.read(path) { |f|  JSON.parse(f) }
+      Chef::Log.warn("doc: #{doc}")
       doc["version"]
     end
 
