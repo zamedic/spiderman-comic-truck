@@ -41,10 +41,11 @@ module SpidermanCommicTruck
     def version_number
       cwd =  node['delivery']['workspace']['repo']
       path = "#{cwd}/package.json"
-      doc = ::File.read(path) { |f|  JSON.parse(f) }
-      Chef::Log.warn("doc: #{doc}")
-      Chef::Log.warn("doc: #{doc['version']}")
-      doc['version']
+      doc = ::File.read(path)
+      packageJson =  JSON.parse(doc)
+      Chef::Log.warn("doc: #{packageJson}")
+      Chef::Log.warn("doc: #{packageJson['version']}")
+      packageJson['version']
     end
 
   end
