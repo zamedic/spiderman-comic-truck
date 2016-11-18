@@ -37,9 +37,9 @@ module SpidermanCommicTruck
     private
 
     def version_number
-      cwd =  node['delivery']['workspace']['repo']
+      cwd =  node['delivery']['workspace']['repo'] q
       path = "#{cwd}/package.json"
-      doc = ::File.open(path) { |f|  JSON.parse(f) }
+      doc = ::File.read(path) { |f|  JSON.parse(f) }
       doc["version"]
     end
 
