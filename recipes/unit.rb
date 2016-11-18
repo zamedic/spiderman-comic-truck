@@ -1,4 +1,4 @@
-include_recipe 'spiderman-comio-truck::npm-registry'
+include_recipe 'spiderman-comic-truck::npm-registry'
 
 directory "#{node['delivery']['workspace']['repo']}/node_modules" do
   action :delete
