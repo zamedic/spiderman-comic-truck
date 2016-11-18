@@ -5,6 +5,7 @@ module SpidermanCommicTruck
   module Helpers
     module Syntax
       include Chef::Mixin::ShellOut
+      extend self
 
       def bumped_npm_version?(path, node)
         return true if node['delivery']['change']['stage'] == 'build'
