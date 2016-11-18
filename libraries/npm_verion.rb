@@ -3,9 +3,9 @@ require 'json'
 
 module SpidermanCommicTruck
   module Helpers
-    module Syntax
+    module Syntax < Chef::Provider::LWRPBase
       include Chef::Mixin::ShellOut
-      extend self
+      use_inline_resources
 
       def bumped_npm_version?(path, node)
         return true if node['delivery']['change']['stage'] == 'build'
@@ -28,5 +28,20 @@ module SpidermanCommicTruck
     def bumped_npm_version?(path)
       SpidermanCommicTruck::Helpers::Syntax.bumped_npm_version?(path, node)
     end
+
+    def update_version()
+      define_project_application(node['delivery']['change']['project'], version_number, Hash.new)
+      sync_envs(node)
+    end
+
+    private
+
+    def version_number
+      cwd = @new_resource.cwd || node['delivery']['workspace']['repo']
+      path = "#{cwd}/package.json"
+      doc = ::File.open(path) { |f|  JSON.parse(f) }
+      doc["version"]
+    end
+
   end
 end
