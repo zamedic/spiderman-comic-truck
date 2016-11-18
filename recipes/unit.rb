@@ -1,3 +1,7 @@
+directory "#{node['delivery']['workspace']['repo']}/node_modules" do
+  action :delete
+end
+
 execute 'npm install' do
   cwd node['delivery']['workspace']['repo']
 end
