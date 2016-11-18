@@ -41,4 +41,15 @@ execute "npm publish" do
 end
 
 
+ruby_block "update version" do
+  block do
+    packageJson = json::JSON.parse("#{node['delivery']['workspace']['repo']}/package.json")
+    version_number = packageJson["version"]
+    SpidermanCommicTruck::Helpers::Publish::define_project_application(node['delivery']['change']['project'], version_number, Hash.new)
+    SpidermanCommicTruck::Helpers::Publish::sync_envs(node)
+  end
+end
+
+
+
 include_recipe 'delivery-truck::publish'
