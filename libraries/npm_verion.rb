@@ -20,20 +20,31 @@ module SpidermanCommicTruck
         end
         Gem::Version.new(old_version) < Gem::Version.new(new_version)
       end
+
+      def application_changes?(changes)
+        Chef::Log.warn(changes)
+        changes.each do |file|
+          if (!file.start_with?('cookbooks/','.delivery/'))
+            return true
+          end
+        end
+        return false
+      end
     end
   end
 
   module DSL
+
+    def application_changes?(changes)
+      SpidermanCommicTruck::Helpers::Syntax.application_changes?(changes)
+    end
 
     def bumped_npm_version?(path)
       SpidermanCommicTruck::Helpers::Syntax.bumped_npm_version?(path, node)
     end
 
     def update_version
-      Chef::Log.warn("defining: #{node['delivery']['change']['project']}, #{version_number}, #{Hash.new}")
       define_project_application(node['delivery']['change']['project'], version_number, Hash.new)
-      Chef::Log.warn("Synching envs: #{node}")
-      sync_envs(node)
     end
 
     private
