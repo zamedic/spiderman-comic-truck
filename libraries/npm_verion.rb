@@ -54,8 +54,6 @@ module SpidermanCommicTruck
       path = "#{cwd}/package.json"
       doc = ::File.read(path)
       packageJson =  JSON.parse(doc)
-      Chef::Log.warn("doc: #{packageJson}")
-      Chef::Log.warn("doc: #{packageJson['version']}")
       packageJson['version']
     end
 

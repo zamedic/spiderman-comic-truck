@@ -24,7 +24,7 @@ if (application_changes?(changed_files))
     action :create_if_missing
   end
 
-  ruby_block "add auth token" do
+  ruby_block "add auth token" do only_if {node["spiderman-comic-truck"]["deploy"]["auth-token"] != nil}
     block do
       tmp_repo = registry.sub("http://", '')
       file = Chef::Util::FileEdit.new("#{node['delivery']['workspace']['repo']}/.npmrc")

@@ -19,3 +19,6 @@ execute "npm config delete registry" do
   ignore_failure true
   only_if {node["spiderman-comic-truck"]["registry"] == nil}
 end
+
+execute "npm set progress=false"
+
